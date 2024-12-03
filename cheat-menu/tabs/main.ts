@@ -14,7 +14,7 @@ const BUTTON_SIZE = {
 export class MainTab extends PlayerTab {
     private readonly mainOptions = new MainOptions();
     private wantedLevel = IniFile.ReadInt(CONFIG_PATH, SECTION, 'WANTED_LEVEL');
-
+    
     renderTabUI() {
         renderMainActions(this.playerChar, BUTTON_SIZE);
         this.mainOptions.renderMainOptions();
@@ -43,5 +43,18 @@ export class MainTab extends PlayerTab {
         this.player.setNeverGetsTired(this.mainOptions.isNeverTired);
 
         Hud.FreezeTimer(this.mainOptions.isMissionTimerFrozen);
+
+        if (this.mainOptions.isCameraFirstPerson != this.mainOptions.FirstPersonCameraInitialized)
+        {
+            log("First person camera " + (this.mainOptions.isCameraFirstPerson ? "on" : "off"));
+            this.mainOptions.FirstPersonCameraInitialized = this.mainOptions.isCameraFirstPerson;
+            showTextBox("First person camera " + (this.mainOptions.isCameraFirstPerson ? "on" : "off"));
+            this.playerChar.toggleFirstPersonCamera(this.mainOptions.isCameraFirstPerson)
+        }
+
+        if (this.mainOptions.isCameraFirstPerson && this.mainOptions.FirstPersonCameraInitialized)
+        {
+            this.playerChar.setHeading(90);
+        }
     }
 }

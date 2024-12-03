@@ -8,6 +8,9 @@ export class MainOptions {
     private _isNeverTired = getBoolean(SECTION, 'NEVER_TIRED');
     private _isWantedLevelFrozen = getBoolean(SECTION, 'WANTED_LEVEL_FROZEN');
     private _isMissionTimerFrozen = getBoolean(SECTION, 'MISSION_TIMER_FROZEN');
+    private _isCameraFirstPerson = getBoolean(SECTION, 'FIRST_PERSON_CAMERA');
+    
+    public FirstPersonCameraInitialized = false;
 
     private set isInfiniteHealthChecked(value: boolean) {
         if (this._isInfiniteHealthChecked === value) return;
@@ -59,11 +62,22 @@ export class MainOptions {
         return this._isMissionTimerFrozen;
     }
 
+    private set isCameraFirstPerson(value: boolean) {
+        if (this._isCameraFirstPerson === value) return;
+
+        this._isCameraFirstPerson = value;
+        saveBoolean(SECTION, 'FIRST_PERSON_CAMERA', value);
+    }
+    get isCameraFirstPerson(): boolean {
+        return this._isCameraFirstPerson;
+    }
+
     renderMainOptions() {
         this.isInfiniteHealthChecked = ImGui.Checkbox('Infinite health', this.isInfiniteHealthChecked);
         this.isInfiniteAmmoChecked = ImGui.Checkbox('Infinite ammo', this.isInfiniteAmmoChecked);
         this.isNeverTired = ImGui.Checkbox('Never tired', this.isNeverTired);
         this.isWantedLevelFrozen = ImGui.Checkbox('Freeze wanted level', this.isWantedLevelFrozen);
         this.isMissionTimerFrozen = ImGui.Checkbox('Freeze mission timer', this.isMissionTimerFrozen);
+        this.isCameraFirstPerson = ImGui.Checkbox('First person camera', this.isCameraFirstPerson);
     }
 }

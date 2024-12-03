@@ -4,6 +4,7 @@ import { MenuChar } from '../../../models/index';
 
 import { INFINITE_WEAPON_AMMO } from '../../../data/index';
 import { SaCar } from './car';
+//import { KeyCode } from '../../../../.config/enums';
 
 export class SaChar extends MenuChar {
     constructor(private readonly char: Char) {
@@ -49,6 +50,27 @@ export class SaChar extends MenuChar {
 
     getWeaponInSlot(id: number) {
         return this.char.getWeaponInSlot(id);
+    }
+
+    toggleFirstPersonCamera(enabled : boolean){
+        if (enabled)
+        {
+            Camera.AttachToChar(this.char, 0.0,-0.1, 0.7, 0.0, 90.0, 0.0, 0.0, 2);
+            // Camera.PersistTrack(true);
+            //this.char.explodeHead();
+        }
+            //Camera.PointAtChar(this.char, 5, 2); 
+        else
+        {
+            // Camera.PersistTrack(false);
+            Camera.RestoreJumpcut();
+        }
+        return this;
+    }
+
+    setHeading(angle : float)
+    {
+        this.char.setHeading(angle);
     }
 
     getCurrentCar() {

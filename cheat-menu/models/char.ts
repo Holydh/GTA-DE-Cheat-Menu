@@ -17,6 +17,10 @@ export abstract class MenuChar {
         weaponModel: number;
     };
 
+    abstract toggleFirstPersonCamera(enabled : boolean): MenuChar;
+
+    abstract setHeading(angle : float) : MenuChar;
+
     abstract getCurrentCar(): MenuCar;
 
     abstract setCoordinates(x: number, y: number, z: number): MenuChar;
