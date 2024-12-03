@@ -52,25 +52,16 @@ export class SaChar extends MenuChar {
         return this.char.getWeaponInSlot(id);
     }
 
-    toggleFirstPersonCamera(enabled : boolean){
+    toggleFirstPersonControls(enabled : boolean){
         if (enabled)
         {
-            Camera.AttachToChar(this.char, 0.0,-0.1, 0.7, 0.0, 90.0, 0.0, 0.0, 2);
-            // Camera.PersistTrack(true);
-            //this.char.explodeHead();
+            Camera.PointAtChar(this.char, 65, 1);
         }
-            //Camera.PointAtChar(this.char, 5, 2); 
         else
         {
-            // Camera.PersistTrack(false);
             Camera.RestoreJumpcut();
         }
         return this;
-    }
-
-    setHeading(angle : float)
-    {
-        this.char.setHeading(angle);
     }
 
     getCurrentCar() {

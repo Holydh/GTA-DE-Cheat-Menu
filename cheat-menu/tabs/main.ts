@@ -44,17 +44,17 @@ export class MainTab extends PlayerTab {
 
         Hud.FreezeTimer(this.mainOptions.isMissionTimerFrozen);
 
-        if (this.mainOptions.isCameraFirstPerson != this.mainOptions.FirstPersonCameraInitialized)
+        if (this.mainOptions.isFirstPersonControlsEnabled != this.mainOptions.FirstPersonControlsInitialized)
         {
-            log("First person camera " + (this.mainOptions.isCameraFirstPerson ? "on" : "off"));
-            this.mainOptions.FirstPersonCameraInitialized = this.mainOptions.isCameraFirstPerson;
-            showTextBox("First person camera " + (this.mainOptions.isCameraFirstPerson ? "on" : "off"));
-            this.playerChar.toggleFirstPersonCamera(this.mainOptions.isCameraFirstPerson)
+            // log("First person controls " + (this.mainOptions.isFirstPersonControlsEnabled ? "on" : "off"));
+            this.mainOptions.FirstPersonControlsInitialized = this.mainOptions.isFirstPersonControlsEnabled;
+            showTextBox("First person controls " + (this.mainOptions.isFirstPersonControlsEnabled ? "on" : "off"));
+            this.playerChar.toggleFirstPersonControls(this.mainOptions.isFirstPersonControlsEnabled)
         }
 
-        if (this.mainOptions.isCameraFirstPerson && this.mainOptions.FirstPersonCameraInitialized)
+        if (this.mainOptions.isFirstPersonControlsEnabled && Camera.GetFadingStatus())
         {
-            this.playerChar.setHeading(90);
+            this.playerChar.toggleFirstPersonControls(this.mainOptions.isFirstPersonControlsEnabled)
         }
     }
 }
